@@ -1,0 +1,34 @@
+#You are given an array of positive integers arr of size N. You want to make all elements of the array equal to a target value X. You can perform two types of operations:
+#Increment Operation: Choose an element arr[i] and increment it by 1. This operation costs C1.
+#Decrement Operation: Choose an element arr[i] and decrement it by 1. This operation costs C2.
+#Find the minimum total cost to make all elements of the array equal to a single value X. The target value X can be any non-negative integer.
+#(Note: As discussed previously, the optimal target X for minimizing costs with different C1 and C2 can sometimes be a value not present in the original array.
+#However, for typical competitive programming "medium" difficulty problems with the given constraints, a common and often accepted simplification is to assume the 
+#optimal X is one of the elements already in the array. The provided solution follows this interpretation.)
+#Input Format:
+#The first line contains space-separated integers representing the array arr.
+#The second line contains the integer C1.
+#The third line contains the integer C2
+def min_total_cost(arr, C1, C2):
+    min_cost = float('inf')
+    min_val = min(arr)
+    max_val = max(arr)
+
+    for target in range(min_val, max_val + 1):
+        cost = 0
+        for num in arr:
+            if num < target:
+                cost += (target - num) * C1
+            else:
+                cost += (num - target) * C2
+        min_cost = min(min_cost, cost)
+
+    return min_cost
+
+# Read input
+arr = list(map(int, input().split()))
+C1 = int(input())
+C2 = int(input())
+
+# Output result
+print(min_total_cost(arr, C1, C2))
