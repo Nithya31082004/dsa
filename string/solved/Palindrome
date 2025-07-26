@@ -1,0 +1,14 @@
+#You are given an integer n. Your task is to determine whether it is a palindrome.
+#A number is considered a palindrome if it reads the same backward as forward, like the string examples "MADAM" or "MOM".
+class Solution:
+    def isPalindrome(self, n):
+        s = str(n)
+        left = 0 
+        right = len(s) - 1
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            else:
+                left += 1
+                right -= 1
+        return True
