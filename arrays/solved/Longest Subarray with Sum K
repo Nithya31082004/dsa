@@ -1,0 +1,16 @@
+#Given an array arr[] containing integers and an integer k, your task is to find the length of the longest subarray where the sum of its elements is equal to the 
+#given value k. If there is no subarray with sum equal to k, return 0.
+class Solution:
+    def longestSubarray(self, arr, k):
+        pref = 0
+        res = 0
+        mp = {}
+        for i, val in enumerate(arr):
+            pref += val
+            if pref == k:
+                res = i + 1
+            elif (pref - k) in mp:
+                res = max(res, i - mp[pref-k])
+            if pref not in mp:
+                mp[pref] = i
+        return res
