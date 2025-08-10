@@ -1,0 +1,46 @@
+#Given an unsorted array arr[] of size n, containing elements from the range 1 to n, it is known that one number in this range is missing, and another number occurs 
+#twice in the array, find both the duplicate number and the missing number.
+
+#geeksforgeeks
+
+#python
+class Solution:
+    def findTwoElement(self, arr):
+        # code here
+        n = len(arr)
+        sn = n * (n + 1) // 2
+        pn = n * (n + 1) * (2 * n + 1) // 6
+        s = sum(arr)
+        p = sum(x*x for x in arr)
+        diff1 = s - sn
+        diff2 = p - pn
+        sum_rm = diff2 // diff1
+        repeating = (sum_rm + diff1) // 2
+        missing = repeating - diff1
+        return repeating, missing
+
+#java
+public class MissingRepeating {
+
+    public static int[] findMissingRepeating(int[] arr) {
+        int n = arr.length;
+
+        long Sn = (long) n * (n + 1) / 2;                     // Expected sum
+        long Pn = (long) n * (n + 1) * (2L * n + 1) / 6;       // Expected sum of squares
+
+        long S = 0, P = 0;
+        for (int num : arr) {
+            S += num;
+            P += (long) num * num;
+        }
+
+        long diff1 = S - Sn;          // R - M
+        long diff2 = P - Pn;          // R^2 - M^2
+
+        long sumRM = diff2 / diff1;   // R + M
+
+        int repeating = (int) ((diff1 + sumRM) / 2);
+        int missing = (int) (repeating - diff1);
+
+        return new int[]{repeating, missing};
+    }
