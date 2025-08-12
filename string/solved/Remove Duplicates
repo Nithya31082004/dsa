@@ -1,0 +1,34 @@
+#Given a string s without spaces, the task is to remove all duplicate characters from it, keeping only the first occurrence.
+#Note: The original order of characters must be kept the same.
+
+#geeksforgeeks
+
+#python
+class Solution:
+	def removeDups(self, str):
+		# code here
+		seen = []
+		for i in range(len(str)):
+		    if str[i] not in seen:
+		        seen.append(str[i])
+		new_str = "".join(seen)
+		return new_str
+
+#java
+class Solution {
+    String removeDups(String str) {
+        boolean[] seen = new boolean[256]; // for all ASCII characters
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (!seen[ch]) {
+                seen[ch] = true;
+                result.append(ch);
+            }
+        }
+
+        return result.toString();
+    }
+}
